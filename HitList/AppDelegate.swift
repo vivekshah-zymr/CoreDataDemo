@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
@@ -88,6 +87,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    // MARK: - Core Data related methods
+    func getManagedContext() -> NSManagedObjectContext {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return managedContext
+    }
+    
+    func saveManagedContext() -> NSManagedObjectContext {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return managedContext
+    }
+    
+    class func shared() -> AppDelegate
+    {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
 }
 
